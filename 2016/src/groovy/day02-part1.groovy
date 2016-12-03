@@ -22,7 +22,7 @@ input.each { line ->
             case 'R': x += 1; break
         }
 
-        if ([x, y].any { Math.abs(it) > 1 }) {
+        if (!([x, y] in keypad.keySet())) {
             // invalid move, go back
             x = px
             y = py
