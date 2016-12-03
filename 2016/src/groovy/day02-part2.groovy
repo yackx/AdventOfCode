@@ -11,7 +11,7 @@ def keypad = [
 int x = 0, y = 0
 String code = ''
 
-def input = new File('day2.txt') as String[]
+def input = new File('day02.txt') as String[]
 
 input.each { line ->
     line.each { d ->

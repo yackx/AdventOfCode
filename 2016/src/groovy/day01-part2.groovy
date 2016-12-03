@@ -13,7 +13,7 @@ def addLocation = { int px, int py ->
     return false
 }
 
-def input = new File('day1.txt').text.split(', ')
+def input = new File('day01.txt').text.split(', ')
 
 for (d in input) {
     String turn = d[0]

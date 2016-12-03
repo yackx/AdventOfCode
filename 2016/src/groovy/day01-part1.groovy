@@ -5,7 +5,7 @@ def directions = [ 'N', 'E', 'S', 'W' ]
 int x = 0, y = 0
 int dir = 0
 
-def input = new File('day1.txt').text.split(', ')
+def input = new File('day01.txt').text.split(', ')
 
 input.each { d ->
     String turn = d[0]
