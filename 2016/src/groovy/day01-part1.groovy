@@ -11,12 +11,9 @@ input.each { d ->
     String turn = d[0]
     int steps = d[1..-1] as int
 
-    if (turn == 'L') {
-        dir = dir - 1
-        if (dir < 0) dir = 3
-    } else {
-        dir = (dir + 1) % 4
-    }
+    dir += turn == 'L' ? -1 : 1
+    dir %= 4
+    if (dir < 0) dir = 3
 
     switch (directions[dir]) {
         case 'N': y -= steps; break
