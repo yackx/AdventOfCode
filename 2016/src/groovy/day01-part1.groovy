@@ -12,8 +12,7 @@ input.each { d ->
     int steps = d[1..-1] as int
 
     dir += turn == 'L' ? -1 : 1
-    dir %= 4
-    if (dir < 0) dir = 3
+    dir = ((dir % 4) + 4 ) % 4
 
     switch (directions[dir]) {
         case 'N': y -= steps; break
