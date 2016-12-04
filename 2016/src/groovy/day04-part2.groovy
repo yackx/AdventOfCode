@@ -10,7 +10,7 @@ def shiftChar = { char c, int n ->
 }
 
 def input = new File('day04.txt') as String[]
-input.each { line ->
+for (line in input) {
     def (_, room, sector) = (line =~ re)[0]
 
     def deciphered = room.replaceAll('-', ' ')
@@ -20,6 +20,6 @@ input.each { line ->
 
     if (deciphered == 'northpole object storage') {
         println sector
-        System.exit(0)
+        break
     }
 }
