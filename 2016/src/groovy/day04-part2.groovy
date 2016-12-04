@@ -1,6 +1,6 @@
 #!/usr/bin/env groovy
 
-def re = /(.+)-(\d+)\[(.+)\]/
+def re = /(.+)-(\d+)/
 
 def shiftChar = { char c, int n ->
     if (c == ' ' as char) return c
