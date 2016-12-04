@@ -7,9 +7,9 @@ int possible = 0
 def emptyTriangles = { (1..3).collect { [] } }
 
 def triangles = emptyTriangles()
-input.each { dims ->
-    def dd = dims.split()*.toInteger()
-    dd.eachWithIndex { d, i -> triangles[i] << d }
+input.each { line ->
+    def dims = line.split()*.toInteger()
+    dims.eachWithIndex { d, i -> triangles[i] << d }
     if (triangles.first().size() == 3) {
         possible += triangles.count { a, b, c ->
             println "$a $b $c"
