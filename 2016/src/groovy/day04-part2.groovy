@@ -15,7 +15,7 @@ for (line in input) {
 
     def deciphered = room.replaceAll('-', ' ')
             .toCharArray()
-            .collect({shiftChar(it, sector as int)})
+            .collect { shiftChar(it, sector as int) }
             .join()
 
     if (deciphered == 'northpole object storage') {
