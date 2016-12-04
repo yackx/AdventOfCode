@@ -6,8 +6,8 @@ int sum = 0
 def input = new File('day04.txt') as String[]
 input.each { line ->
     def (_, room, sector, checksum) = (line =~ re)[0]
-    room = room.replaceAll('-', '')
     def digest = room               // 'aaaaa-bbb-z-y-x'
+            .replaceAll('-', '')    // 'aaaaabbbzyx'
             .toList()               // ['a', 'a', ... 'y', 'x'
             .unique()               // ['a', 'b', 'z', 'y', 'x']
                                     // ['a': 5, 'b': 3, ...]
