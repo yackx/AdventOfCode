@@ -4,17 +4,19 @@ def input = new File('day03.txt') as String[]
 
 int possible = 0
 
-def t = (1..3).collect { [] }
+def emptyTriangles = { (1..3).collect { [] } }
+
+def triangles = emptyTriangles()
 input.each { dims ->
     def dd = dims.split()*.toInteger()
-    dd.eachWithIndex { d, i -> t[i] << d }
-    if (t.first().size() == 3) {
-        possible += t.count {
+    dd.eachWithIndex { d, i -> triangles[i] << d }
+    if (triangles.first().size() == 3) {
+        possible += triangles.count {
             def (a, b, c) = it
             println "$a $b $c"
-            return (a + b > c && a + c > b && b + c > a)
+            (a + b > c && a + c > b && b + c > a)
         }
-        t = (1..3).collect { [] }
+        triangles = emptyTriangles()
     }
 }
 
