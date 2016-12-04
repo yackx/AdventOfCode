@@ -11,8 +11,7 @@ input.each { dims ->
     def dd = dims.split()*.toInteger()
     dd.eachWithIndex { d, i -> triangles[i] << d }
     if (triangles.first().size() == 3) {
-        possible += triangles.count {
-            def (a, b, c) = it
+        possible += triangles.count { a, b, c ->
             println "$a $b $c"
             (a + b > c && a + c > b && b + c > a)
         }
