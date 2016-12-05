@@ -2,8 +2,9 @@
 
 import java.security.MessageDigest
 
+def md = MessageDigest.getInstance('MD5')
+
 def md5 = { String text ->
-	def md = MessageDigest.getInstance('MD5')
 	new BigInteger(1, md.digest(text.bytes))
 			.toString(16)
 			.padLeft(32, "0")
