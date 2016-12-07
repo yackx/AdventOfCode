@@ -3,8 +3,8 @@
 def input = new File('day06.txt') as String[]
 
 def chars = (0..input[0].length()-1).collect({ n ->
-    def row = input*.charAt(n)
-    row.collectEntries {[ (it): row.count(it) ]}.min {e -> e.value}.key
+    def col = input*.charAt(n)
+    col.collectEntries {[ (it): col.count(it) ]}.min {e -> e.value}.key
 })
 
 println chars.join()
