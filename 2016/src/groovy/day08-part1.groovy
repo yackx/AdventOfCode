@@ -1,6 +1,6 @@
 #!/usr/bin/env groovy
 
-class TwoAuthFactor {
+class TwoFactorAuth {
     static final int WIDTH = 50
     static final int HEIGHT = 6
 
@@ -8,10 +8,10 @@ class TwoAuthFactor {
     def reRow = /rotate row y=(.*) by (.*)/
     def reCol = /rotate column x=(.*) by (.*)/
 
-    def printGrid() {
+    def printGrid(grid) {
         (0..HEIGHT-1).each { r ->
             (0..WIDTH-1).each { c ->
-                print([c, r] in lit ? '#' : '.')
+                print([c, r] in grid ? '#' : '.')
             }
             print "\n"
         }
@@ -59,5 +59,7 @@ rotate column x=1 by 1
 rotate row y=0 by 4
 rotate column x=1 by 1'''.split("\n")
 
-def m = new TwoAuthFactor().decode(input)
-println m.size()
+def display = new TwoFactorAuth()
+def grid = display.decode(input)
+println grid.size()
+display.printGrid(grid)
