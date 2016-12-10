@@ -3,6 +3,7 @@
 class TwoAuthFactor {
     static final int WIDTH = 50
     static final int HEIGHT = 6
+
     def reRect = /rect (.*)x(.*)/
     def reRow = /rotate row y=(.*) by (.*)/
     def reCol = /rotate column x=(.*) by (.*)/
@@ -20,16 +21,6 @@ class TwoAuthFactor {
         values.collect({ (it + offset) % modulo })
     }
 
-    def fill = { width, height ->
-        def s = [] as Set
-        (0..width-1).each { w ->
-            (0..height-1).each { h ->
-                s << [w, h]
-            }
-        }
-        return s
-    }
-
     def lit = [] as Set
 
     def decode(String[] input) {
@@ -37,7 +28,8 @@ class TwoAuthFactor {
             println line
             if (line.matches(reRect)) {
                 def (_, w, h) = (line =~ reRect)[0]
-                lit.addAll(fill(w as int, h as int))
+                def rect = [(0..(w as int)-1), (0..(h as int)-1)].combinations()
+                lit.addAll rect
             } else if (line.matches(reRow)) {
                 def (_, row, offset) = (line =~ reRow)[0]
                 def v = lit.findAll({ it[1] == row as int })
