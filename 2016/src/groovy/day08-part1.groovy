@@ -25,31 +25,27 @@ class TwoAuthFactor {
 
     def decode(String[] input) {
         input.each { line ->
-            println line
             if (line.matches(reRect)) {
                 def (_, w, h) = (line =~ reRect)[0]
                 def rect = [(0..(w as int)-1), (0..(h as int)-1)].combinations()
                 lit.addAll rect
             } else if (line.matches(reRow)) {
                 def (_, row, offset) = (line =~ reRow)[0]
-                def v = lit.findAll({ it[1] == row as int })
-                def cols = v.collect({it[0]})
+                def oldCells = lit.findAll { it[1] == row as int }
+                def cols = oldCells.collect {it[0]}
                 def shiftedCols = shiftValues(cols, offset as int, WIDTH)
-                def vvvv = shiftedCols.collect({ [it, row as int] })
-                lit.removeAll(v)
-                lit.addAll(vvvv)
+                def newCells = shiftedCols.collect { [it, row as int] }
+                lit.removeAll oldCells
+                lit.addAll newCells
             } else if (line.matches(reCol)) {
                 def (_, col, offset) = (line =~ reCol)[0]
-                def v = lit.findAll({ it[0] == col as int })
-                def rows = v.collect({it[1]})
+                def oldCells = lit.findAll { it[0] == col as int }
+                def rows = oldCells.collect {it[1]}
                 def shiftedRows = shiftValues(rows, offset as int, HEIGHT)
-                def vvvv = shiftedRows.collect({ [col as int, it] })
-                lit.removeAll(v)
-                lit.addAll(vvvv)
+                def newCells = shiftedRows.collect { [col as int, it] }
+                lit.removeAll oldCells
+                lit.addAll newCells
             }
-            println lit.size()
-            printGrid()
-            println()
         }
         lit
     }
