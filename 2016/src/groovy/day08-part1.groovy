@@ -52,7 +52,6 @@ class TwoAuthFactor {
                 def rows = v.collect({it[1]})
                 def shiftedRows = shiftValues(rows, offset as int, HEIGHT)
                 def vvvv = shiftedRows.collect({ [col as int, it] })
-//                println "*** v= $v   rows= $rows  shiftedRows= $shiftedRows  vvvv= $vvvv"
                 lit.removeAll(v)
                 lit.addAll(vvvv)
             }
@@ -67,13 +66,10 @@ class TwoAuthFactor {
 
 def input = new File('day08.txt') as String[]
 
-
-
 def instructions = '''rect 3x2
 rotate column x=1 by 1
 rotate row y=0 by 4
 rotate column x=1 by 1'''.split("\n")
 
 def m = new TwoAuthFactor().decode(input)
-println m
 println m.size()
