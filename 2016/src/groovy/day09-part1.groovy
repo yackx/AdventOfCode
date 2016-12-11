@@ -3,26 +3,20 @@
 def re = /\((.+?)x(.+?)\)/
 
 def decompressedLength = { String input ->
-    boolean inMarker = false
     int decompressed = 0
-    int index = 0
-    while (index != input.length() && input[index] != "\n") {
-        if (!inMarker) {
-            if (!(input[index] in ['(', "\n"])) {
-                decompressed++
-                index++
-            } else {
-                inMarker = true
-            }
-        } else {
-            def sub = input.substring(index)
-            def group = sub =~ re
+    input = input.replaceAll("\n", '')
+
+    while (input) {
+        def group = input =~ re
+        if (group) {
             def captured = group[0][0] as String
             def howMany = group[0][1] as int
             def repeat = group[0][2] as int
             decompressed += repeat * howMany
-            index += captured.size() + howMany
-            inMarker = false
+            input = input.substring(captured.size() + howMany)
+        } else {
+            decompressed++
+            input = input.substring(1)
         }
     }
 
