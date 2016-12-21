@@ -26,6 +26,7 @@ class Assembunny {
     ]
 
     def execute(instructions) {
+        // registers['c'] = 1 // part2
         while (pointer < instructions.size()) {
             def splitted = instructions[pointer].split(' ')
             def operator = splitted[0]
