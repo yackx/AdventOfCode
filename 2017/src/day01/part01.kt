@@ -6,6 +6,6 @@ fun main(args: Array<String>) {
     val input = File("day01/input.txt").bufferedReader().use { it.readText() }
     val sum = input.indices
             .filter { input[it] == input[(it+1) % input.length] }
-            .sumBy { Integer.valueOf(input[it].toString()) }
+            .sumBy { Character.getNumericValue(input[it]) }
     println(sum)
 }
