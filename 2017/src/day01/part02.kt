@@ -7,6 +7,6 @@ fun main(args: Array<String>) {
     val size = input.length
     val sum = input.indices
             .filter { input[it] == input[(it+size/2) % size] }
-            .sumBy { input[it].toInt() - '0'.toInt() }
+            .sumBy { Integer.valueOf(input[it].toString()) }
     println(sum)
 }
