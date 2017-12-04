@@ -8,6 +8,6 @@ fun main(args: Array<String>) {
                 val splitted = it.split(" ")
                 splitted.size == splitted.toSet().size
             }
-           .count()
+            .count()
     println(count)
 }

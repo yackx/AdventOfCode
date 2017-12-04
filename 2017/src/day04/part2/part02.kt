@@ -17,6 +17,6 @@ fun main(args: Array<String>) {
                 }
                 !anagramFound
             }
-           .count()
+            .count()
     println(count)
 }
