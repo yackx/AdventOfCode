@@ -13,7 +13,7 @@ fun main(args: Array<String>) {
                     }
                 }
             }
-            throw RuntimeException(values.toString())
+            throw IllegalStateException(values.toString())
         }()
         f
     }
