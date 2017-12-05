@@ -8,8 +8,9 @@ fun main(args: Array<String>) {
     var index = 0
     while (index >= 0 && index < offsets.size) {
         val prevIndex = index
+        val prevOffset = offsets[index]
         index += offsets[index]
-        offsets[prevIndex]++
+        offsets[prevIndex] = if (prevOffset >= 3) offsets[prevIndex] - 1 else offsets[prevIndex] + 1
         steps++
     }
     println(steps)
