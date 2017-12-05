@@ -10,7 +10,7 @@ fun main(args: Array<String>) {
         val prevIndex = index
         val prevOffset = offsets[index]
         index += offsets[index]
-        offsets[prevIndex] = if (prevOffset >= 3) offsets[prevIndex] - 1 else offsets[prevIndex] + 1
+        offsets[prevIndex] += if (prevOffset >= 3) - 1 else 1
         steps++
     }
     println(steps)
