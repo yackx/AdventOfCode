@@ -5,8 +5,8 @@ import java.io.File
 fun main(args: Array<String>) {
     val notRoot = mutableSetOf<String>()
     val couldBeRoot = mutableSetOf<String>()
-    val re = Regex("(.*) \\(.*\\)( -> )?(.*)?")
-    File("day07/inputf.txt").bufferedReader().lines().forEach { line ->
+    val re = Regex("(.*) \\(\\d*\\)( -> )?(.*)?")
+    File("day07/input.txt").bufferedReader().lines().forEach { line ->
         val (candidate, _, childrenList, _) = re.matchEntire(line)!!.destructured
         if (!childrenList.isEmpty()) {
             val children = childrenList.split(", ")
