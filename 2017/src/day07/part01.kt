@@ -5,18 +5,14 @@ import java.io.File
 fun main(args: Array<String>) {
     val notRoot = mutableSetOf<String>()
     val couldBeRoot = mutableSetOf<String>()
-    val arrow = Regex("(.*) \\(.*\\) -> (.*)")
+    val re = Regex("(.*) \\(.*\\)( -> )?(.*)?")
     File("day07/input.txt").bufferedReader().lines().forEach { line ->
-        if (line.matches(arrow)) {
-            val children = arrow.matchEntire(line)!!.groupValues[2].split(", ")
-            notRoot.addAll(children)
-            couldBeRoot.removeAll(children)
-            val program = arrow.matchEntire(line)!!.groupValues[1]
-            if (program !in notRoot) couldBeRoot.add(program)
-        } else {
-            val program = Regex("(.*) \\(.*\\).*").matchEntire(line)!!.groupValues[1]
-            if (program !in notRoot) couldBeRoot.add(program)
-        }
+        val children = re.matchEntire(line)!!.groupValues[3].split(", ")
+        println("CHILDREN $children")
+        notRoot.addAll(children)
+        couldBeRoot.removeAll(children)
+        val program = re.matchEntire(line)!!.groupValues[1]
+        if (program !in notRoot) couldBeRoot.add(program)
         println(line)
         println("Could be root: $couldBeRoot")
         println("notRoot: $notRoot")
