@@ -2,7 +2,9 @@ package day09.part2
 
 import java.io.File
 
-private data class State(val garbages: Int, val ignoreNext: Boolean, val inGarbage: Boolean)
+private data class State(val garbages: Int, val ignoreNext: Boolean, val inGarbage: Boolean) {
+    fun increase() = this.copy(garbages = garbages + 1)
+}
 
 private fun countGarbage(s: String): Int =
     s.toCharArray()
@@ -15,9 +17,9 @@ private fun handle(state: State, c: Char): State {
     } else {
         when (c) {
             '!' -> state.copy(ignoreNext = true)
-            '<' -> if (state.inGarbage) state.copy(garbages = state.garbages + 1) else state.copy(inGarbage = true)
+            '<' -> if (state.inGarbage) state.increase() else state.copy(inGarbage = true)
             '>' -> state.copy(inGarbage = false)
-            else -> if (state.inGarbage) state.copy(garbages = state.garbages + 1) else state
+            else -> if (state.inGarbage) state.increase() else state
         }
     }
 }
