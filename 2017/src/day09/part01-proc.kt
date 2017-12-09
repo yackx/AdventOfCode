@@ -2,7 +2,7 @@ package day09
 
 import java.io.File
 
-fun score(s: String): Int {
+private fun score(s: String): Int {
     var score = 0
     var level = 0
     var ignoreNext = false
