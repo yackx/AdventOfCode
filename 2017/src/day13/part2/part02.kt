@@ -2,6 +2,12 @@ package day13.part2
 
 import java.io.File
 
+/*
+This solution works with the sample, but fails on the actual input because of the caching.
+java.lang.OutOfMemoryError: GC overhead limit exceeded
+Without caching, it is even slower to progress and it won't complete in a timely manner.
+ */
+
 data class Layer(val range: Int, val scanPosition: Int, private val direction: Int) {
     fun roam(): Layer {
         val newPosition = scanPosition + direction
@@ -21,16 +27,23 @@ data class Layer(val range: Int, val scanPosition: Int, private val direction: I
     }
 }
 
-fun walk(layers: Map<Int, Layer>, delay: Int): Boolean {
-    var relayers = layers.toMap()
-    println(delay)
-    (1..delay).forEach { relayers = Layer.roamAll(relayers) }
+class PacketWalker(val layers: Map<Int, Layer>) {
+    var waitedStates = mutableMapOf<Int, Map<Int, Layer>>()
 
-    return (0..layers.keys.max()!!).any { packet ->
-        val hit = relayers[packet]?.scanPosition == 0
-        relayers = Layer.roamAll(relayers)
-        hit
+    private fun walk(delay: Int): Boolean {
+        println(delay)
+
+        var relayers = if (delay > 0) Layer.roamAll(waitedStates[delay - 1]!!) else layers
+        waitedStates[delay] = HashMap(relayers)//relayers.toMap()
+
+        return (0..layers.keys.max()!!).any { packet ->
+            val hit = relayers[packet]?.scanPosition == 0
+            relayers = Layer.roamAll(relayers)
+            hit
+        }
     }
+
+    fun waitTimeBeforeCrossing() = generateSequence(0) { it + 1 }.dropWhile { walk(it) }.first()
 }
 
 fun main(args: Array<String>) {
@@ -39,6 +52,6 @@ fun main(args: Array<String>) {
             .associateBy({ it[0] }, { Layer(it[1], 0, +1) })
             .toMutableMap() // k=layer number; v=f/w layer
 
-    val skip = generateSequence(0) { it + 1 }.dropWhile { walk(layers, it) }.first()
-    println(skip)
+    val packetWalker = PacketWalker(layers)
+    println(packetWalker.waitTimeBeforeCrossing())
 }
