@@ -9,7 +9,7 @@ class Walker {
     }
 
     fun walk(firewall: Map<Int, Int>, delay: Int): Boolean {
-        return (0..firewall.keys.max()!!).any { packet ->
+        return (0..firewall.keys.max()!!).any { packet ->       // hit on any of these steps
             firewall.containsKey(packet) && scanPosition(firewall[packet]!!, packet + delay) == 0
         }
     }
