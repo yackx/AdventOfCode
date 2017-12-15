@@ -21,13 +21,15 @@ data class Layer(val range: Int, val scanPosition: Int, private val direction: I
     }
 }
 
-fun walk(layers: Map<Int, Layer>, delay: Int): Int {
+fun walk(layers: Map<Int, Layer>, delay: Int): Boolean {
     var relayers = layers.toMap()
-    return (0..layers.keys.max()!!).sumBy { packet ->
-        val layer = relayers[packet]
-        val damage = if (layer?.scanPosition == 0) packet * layer.range else 0
+    println(delay)
+    (1..delay).forEach { relayers = Layer.roamAll(relayers) }
+
+    return (0..layers.keys.max()!!).any { packet ->
+        val hit = relayers[packet]?.scanPosition == 0
         relayers = Layer.roamAll(relayers)
-        damage
+        hit
     }
 }
 
@@ -37,6 +39,6 @@ fun main(args: Array<String>) {
             .associateBy({ it[0] }, { Layer(it[1], 0, +1) })
             .toMutableMap() // k=layer number; v=f/w layer
 
-
-    println(walk(layers, 0))
+    val skip = generateSequence(0) { it + 1 }.dropWhile { walk(layers, it) }.first()
+    println(skip)
 }
