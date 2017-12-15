@@ -4,18 +4,18 @@ import java.io.File
 
 class Walker {
     fun scanPosition(layerSize: Int, cycles: Int): Int {
-        val cyclez = cycles % (2 * layerSize - 2)
-        return if (cyclez < layerSize) cyclez else 2 * layerSize - cyclez - 2
+        val pos = cycles % (2 * layerSize - 2)
+        return if (pos < layerSize) pos else 2 * layerSize - pos - 2
     }
 
-    fun state(layers: Map<Int, Int>, delay: Int) = layers.mapValues { it -> scanPosition(it.value, delay) }
+    fun layersAt(layers: Map<Int, Int>, delay: Int) = layers.mapValues { it -> scanPosition(it.value, delay) }
 
     fun walk(layers: Map<Int, Int>, delay: Int): Boolean {
-        var laterLayers = state(layers, delay)
+        var laterLayers = layersAt(layers, delay)
 
         return (0..layers.keys.max()!!).any { packet ->
             val hit = laterLayers[packet] == 0
-            laterLayers = state(layers, delay + packet + 1)
+            laterLayers = layersAt(layers, delay + packet + 1)
             hit
         }
     }
