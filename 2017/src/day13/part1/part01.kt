@@ -1,8 +1,8 @@
-package day13
+package day13.part1
 
 import java.io.File
 
-data class Layer(val range: Int, val scanPosition: Int, val direction: Int) {
+data class Layer(val range: Int, val scanPosition: Int, private val direction: Int) {
     fun roam(): Layer {
         val newPosition = scanPosition + direction
         return when {
