@@ -8,15 +8,9 @@ class Walker {
         return if (pos < layerSize) pos else 2 * layerSize - pos - 2
     }
 
-    fun layersAt(layers: Map<Int, Int>, delay: Int) = layers.mapValues { it -> scanPosition(it.value, delay) }
-
-    fun walk(layers: Map<Int, Int>, delay: Int): Boolean {
-        var laterLayers = layersAt(layers, delay)
-
-        return (0..layers.keys.max()!!).any { packet ->
-            val hit = laterLayers[packet] == 0
-            laterLayers = layersAt(layers, delay + packet + 1)
-            hit
+    fun walk(firewall: Map<Int, Int>, delay: Int): Boolean {
+        return (0..firewall.keys.max()!!).any { packet ->
+            firewall.containsKey(packet) && scanPosition(firewall[packet]!!, packet + delay) == 0
         }
     }
 
