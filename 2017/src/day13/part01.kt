@@ -14,19 +14,17 @@ data class Layer(val range: Int, val scanPosition: Int, val direction: Int) {
 }
 
 fun main(args: Array<String>) {
-    val layers = File("day13/sample.txt").readLines()
+    val layers = File("day13/input.txt").readLines()
             .map { it.split(": ").map { it.toInt() } }
             .associateBy({ it[0] }, { Layer(it[1], 0, +1) })
             .toMutableMap() // k=layer number; v=f/w layer
 
-    var damage = 0
-    (0..layers.keys.max()!!).forEach { packet ->
+    val damages = (0..layers.keys.max()!!).sumBy { packet ->
         val layer = layers[packet]
-        if (layer != null && layer.scanPosition == 0) {
-            damage += packet * layer.range
-        }
+        val damage = if (layer?.scanPosition == 0) packet * layer.range else 0
         layers.forEach { n, l -> layers[n] = l.roam() }
+        damage
     }
 
-    println(damage)
+    println(damages)
 }
