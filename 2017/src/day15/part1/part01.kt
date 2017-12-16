@@ -10,7 +10,7 @@ fun main(args: Array<String>) {
     val mod = 2147483647L
     val bitmask = 0xFFFFL
 
-    val score = (0..40_000_000).count {
+    val score = (1..40_000_000).count {
         genA = (genA * factorA) % mod
         genB = (genB * factorB) % mod
         genA and bitmask == genB and bitmask
