@@ -29,7 +29,7 @@ fun main(args: Array<String>) {
                 registers[op1Str] = lastSound
                 done = true
             }
-            "jgz" -> if (convOp1 > 0) ip += op2Str.toInt() - 1
+            "jgz" -> if (convOp1 > 0) ip += convOp2.toInt() - 1
             else -> throw IllegalArgumentException(instruction)
         }
         ip++
