@@ -4,18 +4,17 @@ import java.io.File
 
 // Day 18: Duet
 
-private fun registerOrOperand(registers: Map<String, Long>, operand: String) =
-    operand.toLongOrNull() ?: registers.getValue(operand)
+class Program(val instructions: List<String>) {
+    private var ip = 0
+    private var lastSound = 0L
+    private val registers = mutableMapOf<String, Long>().withDefault { 0 }
+    private var done = false
 
-fun main(args: Array<String>) {
-    val instructions = File("day18/input.txt").bufferedReader().readLines()
+    private fun registerOrOperand(registers: Map<String, Long>, operand: String) =
+        operand.toLongOrNull() ?: registers.getValue(operand)
 
-    val registers = mutableMapOf<String, Long>().withDefault { 0 }
-    var ip = 0
-    var lastSound = 0L
-    var done = false
-    val re = Regex("(\\w{3}) ?(\\w)? ?(.*)?")
-    while (!done) {
+    fun next() {
+        val re = Regex("(\\w{3}) ?(\\w)? ?(.*)?")
         val (instruction, op1Str, op2Str) = re.matchEntire(instructions[ip])!!.destructured
         val convOp2 = registerOrOperand(registers, op2Str)
         val convOp1 = registerOrOperand(registers, op1Str)
@@ -35,5 +34,15 @@ fun main(args: Array<String>) {
         ip++
     }
 
-    println(lastSound)
+    fun isDone() = done
+    fun lastSound() = lastSound
+}
+
+fun main(args: Array<String>) {
+    val instructions = File("day18/input.txt").bufferedReader().readLines()
+    val program = Program(instructions)
+    while (!program.isDone()) {
+        program.next()
+    }
+    println(program.lastSound())
 }
