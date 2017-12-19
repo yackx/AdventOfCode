@@ -16,20 +16,20 @@ fun main(args: Array<String>) {
     var done = false
     val re = Regex("(\\w{3}) ?(\\w)? ?(.*)?")
     while (!done) {
-        println("${instructions[ip]} ip=$ip reg=$registers ($lastSound)")
-        val (instruction, op1, op2) = re.matchEntire(instructions[ip])!!.destructured
-        val convOp2 = registerOrOperand(registers, op2)
+        val (instruction, op1Str, op2Str) = re.matchEntire(instructions[ip])!!.destructured
+        val convOp2 = registerOrOperand(registers, op2Str)
+        val convOp1 = registerOrOperand(registers, op1Str)
         when (instruction) {
-            "snd" -> lastSound = registers.getValue(op1)
-            "set" -> registers[op1] = convOp2
-            "add" -> registers[op1] = registers.getValue(op1) + convOp2
-            "mul" -> registers[op1] = registers.getValue(op1) * convOp2
-            "mod" -> registers[op1] = registers.getValue(op1) % convOp2
-            "rcv" -> if (registers.getValue(op1) != 0L) {
-                registers[op1] = lastSound
+            "snd" -> lastSound = convOp1
+            "set" -> registers[op1Str] = convOp2
+            "add" -> registers[op1Str] = convOp1 + convOp2
+            "mul" -> registers[op1Str] = convOp1 * convOp2
+            "mod" -> registers[op1Str] = convOp1 % convOp2
+            "rcv" -> if (convOp1 != 0L) {
+                registers[op1Str] = lastSound
                 done = true
             }
-            "jgz" -> if (registerOrOperand(registers, op1) > 0) ip += op2.toInt() - 1
+            "jgz" -> if (convOp1 > 0) ip += op2Str.toInt() - 1
             else -> throw IllegalArgumentException(instruction)
         }
         ip++
