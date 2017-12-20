@@ -11,7 +11,7 @@ data class Position(val x: Int, val y: Int)
 
 class Network(val diagram: Diagram) {
     private var letters = mutableListOf<String>()
-    private var position: Position = Position(x = diagram[0].indexOf("|"), y = 0)
+    private var position = Position(x = diagram[0].indexOf("|"), y = 0)
     private var direction = DOWN
 
     private fun charAt(p: Position) = try { diagram[p.y][p.x].toString() } catch (e: IndexOutOfBoundsException) { "" }
