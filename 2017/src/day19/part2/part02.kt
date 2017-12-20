@@ -1,6 +1,6 @@
-package day19
+package day19.part2
 
-import day19.Direction.*
+import day19.part2.Direction.*
 import java.io.File
 
 typealias Diagram = List<String>
@@ -10,9 +10,9 @@ enum class Direction { UP, DOWN, LEFT, RIGHT }
 data class Position(val x: Int, val y: Int)
 
 class Network(val diagram: Diagram) {
-    private var letters = mutableListOf<String>()
     private var position: Position = Position(x = diagram[0].indexOf("|"), y = 0)
     private var direction = DOWN
+    private var steps = 0
 
     private fun charAt(p: Position) = try { diagram[p.y][p.x].toString() } catch (e: IndexOutOfBoundsException) { "" }
 
@@ -36,18 +36,18 @@ class Network(val diagram: Diagram) {
             }
         }
         position = adjacent(position, direction)
-        charAt(position).apply { if (this in "A".."Z") letters.add(this) }
+        steps++
         return hasCharAt(position)
     }
 
-    fun solve(): List<String> {
+    fun solve(): Int {
         while (walk()) { }
-        return letters.toList()
+        return steps
     }
 }
 
 fun main(args: Array<String>) {
     val diagram = File("day19/input.txt").bufferedReader().readLines()
-    val nodes = Network(diagram).solve()
-    println(nodes.joinToString(""))
+    val count = Network(diagram).solve()
+    println(count)
 }
