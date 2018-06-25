@@ -6,7 +6,7 @@ private data class State(val score: Int, val level: Int, val ignoreNext: Boolean
 
 private fun score(s: String): Int =
     s.toCharArray()
-            .fold(State(score = 0, level = 0, ignoreNext = false, inGarbage = false), { state, c -> handle(state, c) })
+            .fold(State(score = 0, level = 0, ignoreNext = false, inGarbage = false)) { state, c -> handle(state, c) }
             .score
 
 private fun handle(state: State, c: Char): State {
