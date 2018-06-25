@@ -9,7 +9,7 @@ enum class Direction { UP, DOWN, LEFT, RIGHT }
 
 data class Position(val x: Int, val y: Int)
 
-class Network(val diagram: Diagram) {
+class Network(private val diagram: Diagram) {
     private var letters = mutableListOf<String>()
     private var position = Position(x = diagram[0].indexOf("|"), y = 0)
     private var direction = DOWN
