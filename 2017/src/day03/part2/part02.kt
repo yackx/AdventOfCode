@@ -60,7 +60,7 @@ private fun squareSequence(): Sequence<Square> {
         // Add the values of all neighbors
         val sum = deltas.map { dp -> squares.getValue(Pair(pair.first + dp.first, pair.second + dp.second)) }.sum()
         // Store and return the new computed square (position+value)
-        squares.put(pair, sum)
+        squares[pair] = sum
         Square(pair, sum)
     }
 }
