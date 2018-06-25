@@ -10,7 +10,7 @@ private fun gridSequence(): Sequence<Pair<Int, Int>> {
     var step = steps    // current step
     var dir = RIGHT
 
-    return generateSequence(Pair(0, 0), {
+    return generateSequence(Pair(0, 0)) {
         step--
         when (dir) {
             RIGHT -> {
@@ -44,7 +44,7 @@ private fun gridSequence(): Sequence<Pair<Int, Int>> {
                 Pair(it.first, it.second + 1)
             }
         }
-    })
+    }
 }
 
 fun square(n: Int): Pair<Int, Int> = gridSequence().take(n).last()
@@ -52,7 +52,6 @@ fun square(n: Int): Pair<Int, Int> = gridSequence().take(n).last()
 fun distance(p: Pair<Int, Int>) = p.first.absoluteValue + p.second.absoluteValue
 
 fun main(args: Array<String>) {
-    println(gridSequence().take(2).toList())
     assert(distance(square(1)) == 0)
     assert(distance(square(12)) == 3)
     assert(distance(square(23)) == 2)

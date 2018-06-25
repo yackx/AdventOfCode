@@ -5,7 +5,7 @@ import java.io.File
 // Day 2: Corruption Checksum
 
 fun allPairIndices(n: Int): Sequence<Pair<Int, Int>> {
-    return generateSequence(Pair(0, 1), {
+    return generateSequence(Pair(0, 1)) {
         var first = it.first
         var second = it.second + 1
         if (first == second) second++
@@ -18,7 +18,7 @@ fun allPairIndices(n: Int): Sequence<Pair<Int, Int>> {
         } else {
             Pair(first, second)
         }
-    })
+    }
 }
 
 fun main(args: Array<String>) {

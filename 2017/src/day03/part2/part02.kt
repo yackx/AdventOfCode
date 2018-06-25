@@ -21,7 +21,7 @@ private fun squareSequence(): Sequence<Square> {
         }
     }
 
-    return generateSequence(Square(Pair(0, 0), 1), {
+    return generateSequence(Square(Pair(0, 0), 1)) {
         step--
         // Find the next square position
         val pair = when (dir) {
@@ -62,7 +62,7 @@ private fun squareSequence(): Sequence<Square> {
         // Store and return the new computed square (position+value)
         squares.put(pair, sum)
         Square(pair, sum)
-    })
+    }
 }
 
 fun main(args: Array<String>) {
