@@ -3,7 +3,7 @@ package day06
 import java.io.File
 
 fun main(args: Array<String>) {
-    val banks = File("day06/input.txt").bufferedReader().readLine()!!.split("\t").map { it.toInt() }.toMutableList()
+    val banks = File("src/day06/input.txt").bufferedReader().readLine()!!.split("\t").map { it.toInt() }.toMutableList()
     val seen = mutableListOf<List<Int>>()
 
     while (true) {

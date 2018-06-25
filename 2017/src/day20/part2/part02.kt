@@ -13,7 +13,7 @@ data class Particule(val p: Vect, val v: Vect, val a: Vect) {
 }
 
 fun main(args: Array<String>) {
-    var particules = File("day20/input.txt").bufferedReader().readLines().map { line ->
+    var particules = File("src/day20/input.txt").bufferedReader().readLines().map { line ->
         val re = Regex("p=<(.*),(.*),(.*)>, v=<(.*),(.*),(.*)>, a=<(.*),(.*),(.*)>")
         val g = re.matchEntire(line)!!.groupValues.dropWhile { it.toLongOrNull() === null }.map { it.toLong() }
         Particule(p = Vect(g[0], g[1], g[2]), v = Vect(g[3], g[4], g[5]), a = Vect(g[6], g[7], g[8]))

@@ -7,7 +7,7 @@ fun main(args: Array<String>) {
     val re = Regex("(\\w.*) (\\w.*) (.*) if (\\w.*) (.*) (.*)")
     var highest = Int.MIN_VALUE
 
-    File("day08/input.txt").bufferedReader().lines().forEach { line ->
+    File("src/day08/input.txt").bufferedReader().lines().forEach { line ->
         val (register, operator, operandStr, conditionRegister, conditionOperator, conditionValueStr) =
                 re.matchEntire(line)!!.destructured
         val conditionValue = conditionValueStr.toInt()

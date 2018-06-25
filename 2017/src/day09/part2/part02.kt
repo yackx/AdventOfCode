@@ -25,6 +25,6 @@ private fun handle(state: State, c: Char): State {
 }
 
 fun main(args: Array<String>) {
-    val input = File("day09/input.txt").readLines().first()
+    val input = File("src/day09/input.txt").readLines().first()
     println(countGarbage(input))
 }

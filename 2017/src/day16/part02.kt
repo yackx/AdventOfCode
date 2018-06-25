@@ -28,7 +28,7 @@ fun dance(programs: List<String>, moves: List<String>): List<String> {
 
 fun main(args: Array<String>) {
     var programs = ('a'..'p').map { it.toString() }.toMutableList()
-    val danceMoves = File("day16/input.txt").bufferedReader().readLine()!!.split(",")
+    val danceMoves = File("src/day16/input.txt").bufferedReader().readLine()!!.split(",")
     val seen = mutableListOf(programs.toList())
 
     var danced: List<String>

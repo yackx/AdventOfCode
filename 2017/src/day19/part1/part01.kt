@@ -47,7 +47,7 @@ class Network(val diagram: Diagram) {
 }
 
 fun main(args: Array<String>) {
-    val diagram = File("day19/input.txt").bufferedReader().readLines()
+    val diagram = File("src/day19/input.txt").bufferedReader().readLines()
     val nodes = Network(diagram).solve()
     println(nodes.joinToString(""))
 }

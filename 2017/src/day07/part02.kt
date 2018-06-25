@@ -64,6 +64,6 @@ private fun weight(node: String, programsInfos: Map<String, Info>): Int {
 }
 
 fun main(args: Array<String>) {
-    val programsInfos = loadProgramsInfo("day07/input.txt")
+    val programsInfos = loadProgramsInfo("src/day07/input.txt")
     println(findUnbalanced(programsInfos))
 }

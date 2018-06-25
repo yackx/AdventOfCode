@@ -61,7 +61,7 @@ class Program(private val id: Int, private val instructions: List<String>) {
 }
 
 fun main(args: Array<String>) {
-    val instructions = File("day18/input.txt").bufferedReader().readLines()
+    val instructions = File("src/day18/input.txt").bufferedReader().readLines()
     val program0 = Program(0, instructions)
     val program1 = Program(1, instructions)
     program1.setRegister("p", 1)

@@ -14,7 +14,7 @@ data class Layer(val range: Int, val scanPosition: Int, private val direction: I
 }
 
 fun main(args: Array<String>) {
-    val layers = File("day13/input.txt").readLines()
+    val layers = File("src/day13/input.txt").readLines()
             .map { it.split(": ").map { it.toInt() } }
             .associateBy({ it[0] }, { Layer(it[1], 0, +1) })
             .toMutableMap() // k=layer number; v=f/w layer

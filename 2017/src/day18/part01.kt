@@ -8,7 +8,7 @@ private fun registerOrOperand(registers: Map<String, Long>, operand: String) =
     operand.toLongOrNull() ?: registers.getValue(operand)
 
 fun main(args: Array<String>) {
-    val instructions = File("day18/input.txt").bufferedReader().readLines()
+    val instructions = File("src/day18/input.txt").bufferedReader().readLines()
 
     val registers = mutableMapOf<String, Long>().withDefault { 0 }
     var ip = 0

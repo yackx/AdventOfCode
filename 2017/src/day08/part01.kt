@@ -6,7 +6,7 @@ fun main(args: Array<String>) {
     val registers = mutableMapOf<String, Int>().withDefault { 0 }
     val re = Regex("(\\w.*) (\\w.*) (.*) if (\\w.*) (.*) (.*)")
 
-    File("day08/input.txt").bufferedReader().lines().forEach { line ->
+    File("src/day08/input.txt").bufferedReader().lines().forEach { line ->
         val (register, operator, operandStr, conditionRegister, conditionOperator, conditionValueStr) =
                 re.matchEntire(line)!!.destructured
         val conditionValue = conditionValueStr.toInt()

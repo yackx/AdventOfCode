@@ -27,7 +27,7 @@ private fun score(s: String): Int {
 }
 
 fun main(args: Array<String>) {
-    val input = File("day09/input.txt").readLines().first()
+    val input = File("src/day09/input.txt").readLines().first()
     println(score(input))
 }
 

@@ -6,7 +6,7 @@ import java.util.*
 fun main(args: Array<String>) {
     val re = Regex("([sxp])(\\d+|\\w)/?(\\d+|\\w)?")
     var programs = ('a'..'p').map { it.toString() }.toMutableList()
-    File("day16/input.txt").bufferedReader().readLine()!!.split(",").forEach { action ->
+    File("src/day16/input.txt").bufferedReader().readLine()!!.split(",").forEach { action ->
         val (move, param1, param2) = re.matchEntire(action)!!.destructured
         when (move) {
             "s" -> {
