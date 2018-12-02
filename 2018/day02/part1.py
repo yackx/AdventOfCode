@@ -9,7 +9,7 @@ two = 0
 three = 0
 for box in data:
     frequencies = Counter(box)
-    incrementFor = lambda n: 1 if len([f for f in frequencies.values() if f == n]) else 0
-    two += incrementFor(2)
-    three += incrementFor(3)
+    count = lambda n: len([f for f in frequencies.values() if f == n])
+    two += 1 if count(2) else 0
+    three += 1 if count(3) else 0
 print(two * three)
