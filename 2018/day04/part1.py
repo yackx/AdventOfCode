@@ -5,6 +5,13 @@ from collections import Counter
 
 
 def minutes_per_guard():
+    """Return a dictionary with each minute spent sleeping for each guard.
+
+    Repeating
+    E.g. {
+        10: [5, 6, 7, ..., 53, 54, 24, 25, 26, 27, 28],
+        99: [40, 41, 42, ..., 48, 49, 36, 37, ..., 48, 49, 50, 51, 52, 53, 54]}
+    """
     data = sorted(open('input.txt').read().splitlines())
 
     mpg = dict()              # k=guard_id, v=[all minutes asleep]
@@ -32,13 +39,15 @@ def minutes_per_guard():
 
 
 def part1(minutes_per_guard):
-    # k = guard id, v = total number of minutes asleep
+    # eg {10: 50, 99: 30}
     count_per_guard = {k: len(v) for (k, v) in minutes_per_guard.items()}
-    # sleeper with max number of minutes asleep
+    # eg 10
     sleeper_id = max(count_per_guard, key=count_per_guard.get)
     # k = minute, v = how many times
+    # eg Counter({24: 2, 5: 1, 6: 1, ...})
     frequencies = Counter(minutes_per_guard[sleeper_id])
     # minute where guard was mostly asleep
+    # eg 24
     minute = max(frequencies, key=frequencies.get)
 
     return sleeper_id * minute
