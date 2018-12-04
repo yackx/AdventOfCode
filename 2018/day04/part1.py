@@ -27,9 +27,13 @@ for line in data:
         current_mins = minutes_per_guard.get(current_guard, [])
         minutes_per_guard[current_guard] = current_mins + new_mins
 
+# k = guard id, v = total number of minutes asleep
 count_per_guard = {k: len(v) for (k, v) in minutes_per_guard.items()}
+# sleeper id = max number of minutes asleep
 sleeper_id = max(count_per_guard, key=count_per_guard.get)
+# k = minute, v = how many times
 frequencies = Counter(minutes_per_guard[sleeper_id])
+# minute where guard was mostly asleep
 minute = max(frequencies, key=frequencies.get)
 
 print(sleeper_id * minute)
