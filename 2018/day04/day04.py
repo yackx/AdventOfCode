@@ -15,8 +15,7 @@ def minutes_per_guard():
     data = sorted(open('input.txt').read().splitlines())
 
     mpg = dict()
-    current_guard = None
-    start = None
+    current_guard, start = 0, 0
     r_cycle = lambda s: rf".*:(\d\d).*{s}"  # falls or wakes
 
     for line in data:
