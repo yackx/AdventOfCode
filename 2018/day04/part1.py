@@ -43,11 +43,9 @@ def part1(minutes_per_guard):
     count_per_guard = {k: len(v) for (k, v) in minutes_per_guard.items()}
     # eg 10
     sleeper_id = max(count_per_guard, key=count_per_guard.get)
-    # k = minute, v = how many times
-    # eg Counter({24: 2, 5: 1, 6: 1, ...})
+    # eg Counter({24: 2, 5: 1, 6: 1, ...}) (k = minute, v = how many times)
     frequencies = Counter(minutes_per_guard[sleeper_id])
-    # minute where guard was mostly asleep
-    # eg 24
+    # eg 24 (minute where guard was mostly asleep)
     minute = max(frequencies, key=frequencies.get)
 
     return sleeper_id * minute
