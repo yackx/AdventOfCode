@@ -38,10 +38,7 @@ def minutes_per_guard():
 
 
 def part1(minutes_per_guard):
-    # eg {10: 50, 99: 30}
-    count_per_guard = {k: len(v) for (k, v) in minutes_per_guard.items()}
-    # eg 10
-    sleeper_id = max(count_per_guard, key=count_per_guard.get)
+    sleeper_id = max(minutes_per_guard, key=lambda x: len(minutes_per_guard[x]))
     # eg Counter({24: 2, 5: 1, 6: 1, ...}) (k = minute, v = how many times)
     frequencies = Counter(minutes_per_guard[sleeper_id])
     # eg 24 (minute where guard was mostly asleep)
