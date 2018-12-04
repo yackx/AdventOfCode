@@ -9,13 +9,16 @@ minutes_per_guard = dict()  # k = guard id, v = list of all minutes asleep
 current_guard = None
 start = None
 finish = None
+
 for line in data:
     guard = re.findall(r".*#(\d+).*", line)
     if guard:
         current_guard = int(guard[0])
+
     falls = re.findall(r".*:(\d\d).*falls", line)
     if falls:
         start = int(falls[0])
+
     wakes = re.findall(r".*:(\d\d).*wakes", line)
     if wakes:
         finish = int(wakes[0])
