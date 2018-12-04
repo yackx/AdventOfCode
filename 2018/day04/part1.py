@@ -14,7 +14,7 @@ def minutes_per_guard():
     """
     data = sorted(open('input.txt').read().splitlines())
 
-    mpg = dict()              # k=guard_id, v=[all minutes asleep]
+    mpg = dict()
     current_guard = None
     start = None
     r_cycle = lambda s: rf".*:(\d\d).*{s}"  # falls or wakes
