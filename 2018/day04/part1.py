@@ -5,21 +5,22 @@ from collections import Counter
 
 data = sorted(open('input.txt').read().splitlines())
 
-minutes_per_guard = dict()  # k = guard id, v = list of all minutes asleep
+minutes_per_guard = dict()              # k=guard_id, v=[all minutes asleep]
 current_guard = None
 start = None
 finish = None
+r_cycle = lambda s: rf".*:(\d\d).*{s}"  # falls or wakes
 
 for line in data:
     guard = re.findall(r".*#(\d+).*", line)
     if guard:
         current_guard = int(guard[0])
 
-    falls = re.findall(r".*:(\d\d).*falls", line)
+    falls = re.findall(r_cycle('falls'), line)
     if falls:
         start = int(falls[0])
 
-    wakes = re.findall(r".*:(\d\d).*wakes", line)
+    wakes = re.findall(r_cycle('wakes'), line)
     if wakes:
         finish = int(wakes[0])
         new_mins = list(range(start, finish))
