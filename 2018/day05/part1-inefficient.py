@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+# Grossly inefficient as the string is scanned many times
 
 def reduce(s):
     replaced = True
