@@ -22,8 +22,8 @@ bottom = max(n[1] for n in coords)
 grid = {}   # k=point, v=index of location
 count = 0
 
-for x in range(left-1, right+2):
-    for y in range(top-1, bottom+2):
+for x in range(left, right):
+    for y in range(top, bottom):
         p = (x, y)
         sum_of_distances = sum([distance(p, c) for c in coords])
         if sum_of_distances < safe:
