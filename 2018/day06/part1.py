@@ -39,4 +39,4 @@ infinites = {grid[p] for p in edges if p in grid}
 frequencies = Counter([c for c in grid.values() if c not in infinites])
 
 # Size of the largest finite area
-print(max([f for f in frequencies.values()]))
+print(max(frequencies.values()))
