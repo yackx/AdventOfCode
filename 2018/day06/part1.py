@@ -3,11 +3,6 @@
 import re
 from collections import Counter
 
-
-def distance(c1, c2):
-    return abs(c1[0] - c2[0]) + abs(c1[1] - c2[1])
-
-
 data = open('input.txt').read().splitlines()
 coords = [(x, y) for (x, y) in (map(int, re.findall(r"\d+", line)) for line in data)]
 
@@ -21,6 +16,7 @@ grid = {}   # k=point, v=index of location
 
 # Iterate over each location inside the perimeter +1 (to detect infinite areas).
 # Compute its distance to every coordinate. -1 is ex aequo
+distance = lambda c1, c2: abs(c1[0] - c2[0]) + abs(c1[1] - c2[1])
 for x in range(left-1, right+2):
     for y in range(top-1, bottom+2):
         p = (x, y)
