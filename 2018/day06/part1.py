@@ -15,14 +15,15 @@ bottom = max(n[1] for n in coords)
 grid = {}   # k=point, v=index of location
 
 # Iterate over each location inside the perimeter +1 (to detect infinite areas).
-# Compute its distance to every coordinate. -1 is ex aequo
+# Compute its distance to every coordinate
 distance = lambda c1, c2: abs(c1[0] - c2[0]) + abs(c1[1] - c2[1])
 for x in range(left-1, right+2):
     for y in range(top-1, bottom+2):
         p = (x, y)
         distances = [distance(p, c) for c in coords]
         lowest = min(distances)
-        grid[p] = distances.index(lowest) if distances.count(lowest) == 1 else -1
+        if distances.count(lowest) == 1:
+            grid[p] = distances.index(lowest)   # no ex-aequo
 
 # Any area found in the outer edge is an infinite area. Discard it
 edges = [
@@ -32,10 +33,10 @@ edges = [
         [(right+1, y) for y in range(top-1, bottom+1)]
     ]
 edges = [item for sublist in edges for item in sublist]  # flatten
-infinites = {grid[p] for p in edges if grid[p] is not -1}
+infinites = {grid[p] for p in edges if p in grid}
 
 # For each coordinate (k), count how many locations are closest (v)
-frequencies = Counter([c for c in grid.values() if c is not -1 and c not in infinites])
+frequencies = Counter([c for c in grid.values() if c not in infinites])
 
 # Size of the largest finite area
 print(max([f for f in frequencies.values()]))
