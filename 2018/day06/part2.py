@@ -19,15 +19,12 @@ right = max(n[0] for n in coords)
 top = min(n[1] for n in coords)
 bottom = max(n[1] for n in coords)
 
-grid = {}   # k=point, v=index of location
 count = 0
-
 for x in range(left, right):
     for y in range(top, bottom):
         p = (x, y)
         sum_of_distances = sum([distance(p, c) for c in coords])
         if sum_of_distances < safe:
             count += 1
-
 
 print(count)
