@@ -9,25 +9,26 @@ def distance(c1, c2):
 
 
 data = open('input.txt').read().splitlines()
-coord = [(x, y) for (x, y) in (map(int, re.findall(r"\d+", line)) for line in data)]
+locations = [(x, y) for (x, y) in (map(int, re.findall(r"\d+", line)) for line in data)]
 
 # Find the perimeter
-left = min(n[0] for n in coord)
-right = max(n[0] for n in coord)
-top = min(n[1] for n in coord)
-bottom = max(n[1] for n in coord)
+left = min(n[0] for n in locations)
+right = max(n[0] for n in locations)
+top = min(n[1] for n in locations)
+bottom = max(n[1] for n in locations)
 
-grid = {}   # k=point, v=index in coord (=location)
+grid = {}   # k=point, v=index of location
 
-# Iterate over all points inside the perimeter +1 (to detect infinite areas)
+# Iterate over each points inside the perimeter +1 (to detect infinite areas).
+# Compute its distance to every locations. -1 is ex aequo
 for x in range(left-1, right+2):
     for y in range(top-1, bottom+2):
         p = (x, y)
-        distances = [distance(p, c) for c in coord]
+        distances = [distance(p, c) for c in locations]
         lowest = min(distances)
         grid[p] = distances.index(lowest) if distances.count(lowest) == 1 else -1
 
-# Any location found in the outer edge is an infinite area
+# Any location found in the outer edge is an infinite area. Discard it
 edges = [
         [(x, top-1) for x in range(left-1, right+1)] +
         [(x, bottom+1) for x in range(left-1, right+1)] +
@@ -37,7 +38,7 @@ edges = [
 edges = [item for sublist in edges for item in sublist]
 infinites = {grid[p] for p in edges if grid[p] is not -1}
 
-# For each location (key), count how many points are closest (value)
+# For each location (k), count how many points are closest (v)
 frequencies = Counter([v for v in grid.values() if v is not -1 and v not in infinites])
 
 # Size of the largest finite area
