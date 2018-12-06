@@ -31,7 +31,7 @@ edges = [
         [(left-1, y) for y in range(top-1, bottom+1)] +
         [(right+1, y) for y in range(top-1, bottom+1)]
     ]
-edges = [item for sublist in edges for item in sublist]
+edges = [item for sublist in edges for item in sublist]  # flatten
 infinites = {grid[p] for p in edges if grid[p] is not -1}
 
 # For each coordinate (k), count how many locations are closest (v)
