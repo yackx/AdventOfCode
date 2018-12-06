@@ -11,7 +11,7 @@ def distance(c1, c2):
 data = open('input.txt').read().splitlines()
 coords = [(x, y) for (x, y) in (map(int, re.findall(r"\d+", line)) for line in data)]
 
-# Find the perimeter
+# Perimeter
 left = min(n[0] for n in coords)
 right = max(n[0] for n in coords)
 top = min(n[1] for n in coords)
