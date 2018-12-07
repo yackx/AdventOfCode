@@ -2,6 +2,7 @@
 
 # Grossly inefficient as the string is scanned many times
 
+
 def reduce(s):
     replaced = True
     while replaced:
