@@ -26,6 +26,7 @@ assert play(1104, 17) == 2764
 assert play(6111, 21) == 54718
 assert play(5807, 30) == 37305
 print(play(71843, 468))
+print(play(71843*100, 468))
 
 
 # Notes:
