@@ -49,4 +49,5 @@ sequence = iter_steps(data, skip+take)
 for i in range(skip+take):
     data = next(sequence)
     if i >= skip:
+        print(f"After {i+1} seconds")
         display(data)
