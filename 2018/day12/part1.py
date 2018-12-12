@@ -22,10 +22,7 @@ assert len(rules) == len(states)
 for step in range(generations):
     next_gen = []
     for n in range(min(plants)-2, max(plants)+3):
-        plants_slice = []
-        for i in range(-2, +3):
-            if i+n in plants:
-                plants_slice.append(i)
+        plants_slice = [i for i in range(-2, +3) if i+n in plants]
         rule_index = rules.index(plants_slice) if plants_slice in rules else None
         if rule_index is not None:
             if states[rule_index] is '#':
