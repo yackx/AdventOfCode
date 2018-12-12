@@ -2,14 +2,19 @@
 
 generations = 20
 
+
+def parse(s):
+    return [i for i in range(len(s)) if s[i] is '#']
+
+
 data = open('input.txt').read().splitlines()
-first_line = data[0].split(": ")[1]
-plants = [i for i in range(len(first_line)) if first_line[i] is '#']
+initial_state = data[0].split(": ")[1]
+plants = parse(initial_state)
 
 rules, states = [], []
 for line in data[2:]:
     s_rule, state = line.split(' => ')
-    rule = [i-2 for i in range(len(s_rule)) if s_rule[i] is '#']
+    rule = [i-2 for i in parse(s_rule)]
     rules.append(rule)
     states.append(state)
 assert len(rules) == len(states)
