@@ -8,12 +8,11 @@ grid = {(j, i): data[i][j] for i in range(len(data)) for j in range(len(data[i])
 # Filter out blanks
 grid = {k: v for k, v in grid.items() if v is not ' '}
 # Extract carts: {(0, 2): '>', (3, 9): 'v'}
-cart_symbols = ['<', '>', 'v', '^']
-carts = {k: v for k, v in grid.items() if v in cart_symbols}
+carts = {k: v for k, v in grid.items() if v in ['<', '>', 'v', '^']}
 # Define a left next turn for each cart: {(0, 2): ('>', '<'), (3, 9): ('v', '<')}
 carts = {k: (v, 'left') for k, v in carts.items()}
 # Turn carts into '-' rails on the original grid
-rails = {k: v if v not in cart_symbols else '-' for k, v in grid.items()}
+rails = {k: '-' if v in ['>', '<'] else '|' if v in ['^', 'v'] else v for k, v in grid.items()}
 
 cart_directions = {
     '<': (-1, 0), '>': (+1, 0), 'v': (0, +1), '^': (0, -1),
