@@ -4,7 +4,7 @@ import operator
 
 data = open('sample.txt').read().splitlines()
 # Build a grid of rails and carts: {(0, 0): '/', (0, 1): '-', ...}
-grid = {(i, j): data[i][j] for i in range(len(data)) for j in range(len(data[i]))}
+grid = {(j, i): data[i][j] for i in range(len(data)) for j in range(len(data[i]))}
 # Filter out blanks
 grid = {k: v for k, v in grid.items() if v is not ' '}
 # Extract carts: {(0, 2): '>', (3, 9): 'v'}
@@ -16,7 +16,7 @@ carts = {k: (v, 'left') for k, v in carts.items()}
 rails = {k: v if v not in cart_symbols else '-' for k, v in grid.items()}
 
 cart_directions = {
-    '<': (0, -1), '>': (0, +1), 'v': (+1, 0), '^': (-1, 0),
+    '<': (-1, 0), '>': (+1, 0), 'v': (0, +1), '^': (0, -1),
 }
 rail_directions = {
     ('/', '^'): '>', ('/', '<'): 'v', ('/', '>'): '^', ('/', 'v'): '<',
@@ -31,7 +31,7 @@ turns = {
 turn_sequence = ['left', 'straight', 'right']
 turn_symbols = ['/', '\\']
 
-# carts: {(0, 2): ('>', 'left'), (3, 9): ('v', 'left')}, ...}
+# carts: {(2, 0): ('>', 'left'), (9, 3): ('v', 'left')}, ...}
 while True:
     new_carts = {}
     print(f'\nDealing with {carts}')
