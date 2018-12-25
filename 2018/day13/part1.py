@@ -2,15 +2,20 @@
 
 import operator
 
-data = open('sample.txt').read().splitlines()
+data = open('input.txt').read().splitlines()
+
 # Build a grid of rails and carts: {(0, 0): '/', (0, 1): '-', ...}
 grid = {(j, i): data[i][j] for i in range(len(data)) for j in range(len(data[i]))}
+
 # Filter out blanks
 grid = {k: v for k, v in grid.items() if v is not ' '}
+
 # Extract carts: {(0, 2): '>', (3, 9): 'v'}
 carts = {k: v for k, v in grid.items() if v in ['<', '>', 'v', '^']}
+
 # Define a left next turn for each cart: {(0, 2): ('>', '<'), (3, 9): ('v', '<')}
 carts = {k: (v, 'left') for k, v in carts.items()}
+
 # Turn carts into '-' rails on the original grid
 rails = {k: '-' if v in ['>', '<'] else '|' if v in ['^', 'v'] else v for k, v in grid.items()}
 
@@ -37,10 +42,6 @@ while True:
     for position, (direction, next_turn) in carts.items():
         new_position = tuple(map(operator.add, position, cart_directions[direction]))
         print(f'{position}, {(direction, next_turn)} to {new_position}')
-        if new_position in new_carts.keys():
-            # collision
-            print(f'COLLISION {new_position}')
-            exit(0)
         new_rail = rails[new_position]
         if new_rail is '+':
             # crossing
@@ -50,7 +51,11 @@ while True:
         if new_rail in turn_symbols:
             # turn
             direction = rail_directions[(new_rail, direction)]
-        print(f'  {new_position} rail is {new_rail} => {(direction, next_turn)}')
+        # print(f'  {new_position} rail is {new_rail} => {(direction, next_turn)}')
+        if new_position in new_carts.keys():
+            # collision
+            # print(f'COLLISION {new_position}')
+            exit(0)
         new_carts[new_position] = (direction, next_turn)
 
     carts = new_carts
