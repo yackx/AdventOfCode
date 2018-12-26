@@ -4,6 +4,8 @@
 def score(target):
     recipes = '37'
     elf1, elf2 = 0, 1
+
+    # Factoring into a lambda expression is slower (no inlining)
     elf = lambda e: (e + 1 + int(recipes[e])) % len(recipes)
 
     # The slice is mandatory for the computation to complete

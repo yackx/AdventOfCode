@@ -1,5 +1,7 @@
-# Part 1 is way slower than my solution
 # https://www.reddit.com/r/adventofcode/comments/a61ojp/2018_day_14_solutions/
+# Part 1 is way slower than my solution
+# Part 2 is slightly faster because the elf recipe is not factored into a lambda.
+# And overall this solution is very short and works well for both parts.
 
 # recipes = open('day14.in','r').read().strip()
 recipes = '825401'  # puzzle input
