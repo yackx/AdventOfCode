@@ -20,7 +20,8 @@ def compute(codes):
 
 with open("input.txt", "r") as f:
     original_codes = [int(x) for x in f.readline().split(",")]
-    for noun, verb in itertools.product(range(0, 100), range(0, 100)):
+    r = range(0, 100)
+    for noun, verb in itertools.product(r, r):
         candidate_codes = list(original_codes)
         candidate_codes[1] = noun
         candidate_codes[2] = verb
