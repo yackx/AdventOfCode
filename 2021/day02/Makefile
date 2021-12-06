@@ -1,5 +1,5 @@
 CC      := gcc
-CFLAGS  := -std=c11 -Wall -Wpedantic -Wextra
+CFLAGS  := -std=c18 -Wall -Wpedantic -Wextra
 
 all: part1 part2
 

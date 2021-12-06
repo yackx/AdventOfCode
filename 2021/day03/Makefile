@@ -1,5 +1,5 @@
 CC      := gcc
-CFLAGS  := -std=c11 -Wall -Wpedantic -Wextra
+CFLAGS  := -std=c18 -Wall -Wpedantic -Wextra
 # -DBIT_COUNT=5 -DDIGIT_COUNT=12
 
 all: part1 part2

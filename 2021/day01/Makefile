@@ -1,6 +1,6 @@
 TARGET  := $1.out
 CC      := gcc
-CFLAGS  := -std=c11 -Wall -Wpedantic -Wextra -O2
+CFLAGS  := -std=c18 -Wall -Wpedantic -Wextra -O2
 
 all: $(TARGET)
 
