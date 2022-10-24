@@ -36,7 +36,7 @@ func column(i, j int) int {
 	return i * boardSize + j
 }
 
-// isBingoForFunc check if bingo is achieved on row or column
+// isBingoForFunc checks if bingo is achieved on row or column
 func (b Board) isBingoForFunc(indexFunc BingoIndexFunc) bool {
 	for i := 0; i < boardSize; i++ {
 		bingo := true
@@ -53,10 +53,12 @@ func (b Board) isBingoForFunc(indexFunc BingoIndexFunc) bool {
 	return false
 }
 
+// isBingo checks if the board is bingo!
 func (b Board) isBingo() bool {
 	return b.isBingoForFunc(row) || b.isBingoForFunc(column)
 }
 
+// score computes the board "score" according to AoC
 func (b Board) score(number int) int {
 	sum := 0
 	for _, n := range b {
@@ -67,6 +69,7 @@ func (b Board) score(number int) int {
 	return sum * number
 }
 
+// readDrawSequence reads the draw sequence, e.g. first line of the input
 func readDrawSequence(scanner *bufio.Scanner) DrawSequence {
 	scanner.Scan()
 	line := scanner.Text()
@@ -79,6 +82,7 @@ func readDrawSequence(scanner *bufio.Scanner) DrawSequence {
 	return sequence
 }
 
+// readBoards reads and returns the boards from the input
 func readBoards(scanner *bufio.Scanner) []Board {
 	boards := make([]Board, 0)
 	var board Board
