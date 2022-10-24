@@ -106,7 +106,7 @@ func readBoards(scanner *bufio.Scanner) []Board {
 	return boards
 }
 
-func Solve(drawSequence DrawSequence, boards []Board) int {
+func SolvePart1(drawSequence DrawSequence, boards []Board) int {
 	for _, number := range drawSequence {
 		for _, board := range boards {
 			board.Draw(number)
@@ -118,10 +118,34 @@ func Solve(drawSequence DrawSequence, boards []Board) int {
 	panic("no bingo")
 }
 
+func SolvePart2(drawSequence DrawSequence, boards []Board) int {
+    hiDraws := 0
+    slowestBingoScore := 0
+    for _, board := range boards {
+        draws := 0
+        bingo := false
+    	for i := 0; i < len(drawSequence) && !bingo; i++ {
+    	    number := drawSequence[i]
+			board.Draw(number)
+    	    draws++
+			if board.isBingo() {
+			    bingo = true
+			    if draws > hiDraws {
+			        hiDraws = draws
+			        slowestBingoScore = board.score(number)
+			    }
+			}
+    	}
+    }
+    return slowestBingoScore
+}
+
 func main() {
 	scanner := bufio.NewScanner(os.Stdin)
 	drawSequence := readDrawSequence(scanner)
 	boards := readBoards(scanner)
-	solution := Solve(drawSequence, boards)
-	fmt.Println(solution)
+	solution1 := SolvePart1(drawSequence, boards)
+	fmt.Println(solution1)
+	solution2 := SolvePart2(drawSequence, boards)
+	fmt.Println(solution2)
 }
