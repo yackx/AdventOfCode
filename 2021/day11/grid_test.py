@@ -1,6 +1,6 @@
 import pytest
 
-from part1 import Grid
+from solution import Grid
 
 
 @pytest.fixture
@@ -52,13 +52,17 @@ def test_neighbors():
 
 
 @pytest.mark.parametrize(["cycles", "expected_flashes"], [(1, 9), (2, 9)])
-def test_evolve_mini_sample(fixture_mini_sample, cycles, expected_flashes):
-    assert fixture_mini_sample.evolve(cycles).flashes == expected_flashes
+def test_solve_part_1_mini_sample(fixture_mini_sample, cycles, expected_flashes):
+    assert fixture_mini_sample.solve_part_1(cycles) == expected_flashes
 
 
 @pytest.mark.parametrize(["cycles", "expected_flashes"], [(1, 0), (2, 35), (10, 204), (100, 1656)])
-def test_evolve_sample(fixture_sample, cycles, expected_flashes):
-    assert fixture_sample.evolve(cycles).flashes == expected_flashes
+def test_solve_part_1_sample(fixture_sample, cycles, expected_flashes):
+    assert fixture_sample.solve_part_1(cycles) == expected_flashes
+
+
+def test_solve_part_2_sample(fixture_sample):
+    assert fixture_sample.solve_part_2() == 195
 
 
 def assert_lists_same_elements(l1, l2):

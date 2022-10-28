@@ -9,6 +9,7 @@ n_cols = None
 class Grid:
     cells: [[int]]
     flashes = 0
+    cycle = 0
 
     @staticmethod
     def from_arr(octo: [[int]]):
@@ -52,10 +53,14 @@ class Grid:
 
     def reset_after_flash(self):
         for x, y in self.coords():
-            if self.cells[x][y] < 0 or self.cells[x][y] >= 10:
+            if self.cells[x][y] < 0 or self.cells[x][y] > 9:
                 self.cells[x][y] = 0
 
-    def evolve(self, cycles: int = 1):
+    def is_all_flashing(self):
+        return all(self.cells[x][y] < 0 or self.cells[x][y] > 9 for x, y in self.coords())
+
+    def evolve(self, cycles: int = 1, reset_flashes_after_cycle=True):
+        self.cycle += 1
         for cycle in range(cycles):
             self.increase()
             while self.has_flash():
@@ -65,9 +70,20 @@ class Grid:
                     for nx, ny in self.neighbors(x, y):
                         if self.cells[nx][ny] > 0:
                             self.cells[nx][ny] += 1
-            self.reset_after_flash()
+            if reset_flashes_after_cycle:
+                self.reset_after_flash()  # not for part 2
 
         return self
+
+    def solve_part_1(self, cycles: int = 100):
+        self.evolve(cycles)
+        return self.flashes
+
+    def solve_part_2(self):
+        while self.evolve(reset_flashes_after_cycle=False):
+            if self.is_all_flashing():
+                return self.cycle
+            self.reset_after_flash()
 
     def __str__(self) -> str:
         return str(self.cells)
@@ -78,5 +94,6 @@ if __name__ == "__main__":
         [int(c) for c in line.rstrip()]
         for line in sys.stdin.readlines() if line != "\n"
     ]
-    grid = Grid.from_arr(octopuses).evolve(100)
-    print(grid.flashes)
+
+    print(Grid.from_arr(octopuses).solve_part_1(100))
+    print(Grid.from_arr(octopuses).solve_part_2())
