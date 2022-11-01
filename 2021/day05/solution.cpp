@@ -43,7 +43,7 @@ long solve(std::vector<LINE> lines, Part part)
 {
     std::regex rx("([0-9]+),([0-9]+) -> ([0-9]+),([0-9]+)");
     std::map<std::pair<int, int>, int> diagram;  // k=point coord; v=nb of points
-    for (std::tuple<int, int, int, int> line : lines) {
+    for (LINE line : lines) {
         std::smatch match;
         auto [x1, y1, x2, y2] = line;
         if (x1 == x2) {
