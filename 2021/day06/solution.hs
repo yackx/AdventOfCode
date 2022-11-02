@@ -13,7 +13,7 @@ nextGen :: [Int] -> [Int]
 nextGen fishes = (incrementPool fishes) ++ (newSpawns fishes)
 
 incrementPool :: [Int] -> [Int]
-incrementPool fishes = [if x == 0 then 6 else x - 1 | x <- fishes ]
+incrementPool fishes = [if x == 0 then 6 else x - 1 | x <- fishes]
 
 newSpawns :: [Int] -> [Int]
 newSpawns fishes = replicate (countSpawn fishes) $ 8
