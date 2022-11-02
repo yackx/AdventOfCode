@@ -1,15 +1,15 @@
-# Day 6
+# Day 6 - part 1
 
 ## Compile
 
 Haskell compiler required
 
 ```bash
-$ ghc solution.hs
+$ ghc part1.hs
 ```
 
 ## Run
 
 ```bash
-$ cat input.txt | ./solution
+$ cat input.txt | ./part1
 ```
