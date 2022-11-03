@@ -1,32 +1,29 @@
 import sys
 
 
-def calculate_risk(heigths):
-    def get_cell(row, col):
-        large = 10  # larger than single digit
+def calculate_risk(heights: [[int]]):
+    def point_height(row, col):
         try:
-            if row < 0 or col < 0:
-                return large
-            return heigths[row][col]
+            return heights[row][col]
         except IndexError:
-            return large
+            return 10  # larger than single digit
 
     def risk_for(row, col):
         deltas = [(-1, 0), (0, 1), (1, 0), (0, -1)]
-        cell = get_cell(row, col)
-        if all(get_cell(row-dy, col-dx) > cell for dy, dx in deltas):
-            return cell + 1
+        height = point_height(row, col)
+        if all(point_height(row-dy, col-dx) > height for dy, dx in deltas):
+            return height + 1
         else:
             return 0
 
-    row_range = range(0, len(heigths))
-    col_range = range(0, len(heigths[0]))
+    row_range = range(len(heights))
+    col_range = range(len(heights[0]))
     return sum(risk_for(row, col) for row in row_range for col in col_range)
 
 
 if __name__ == "__main__":
-    heights = [
+    heights_map = [
         [int(c) for c in line.rstrip()]
         for line in sys.stdin.readlines() if line != "\n"
     ]
-    print(calculate_risk(heights))
+    print(calculate_risk(heights_map))
