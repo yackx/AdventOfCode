@@ -1,5 +1,6 @@
 package day03.part1
 
+
 fun parseLine(row: Int, line: String): Schematic {
     val isPeriod: (Char) -> Boolean = { it == '.' }
     val isDigit: (Char) -> Boolean = { it.isDigit() }
