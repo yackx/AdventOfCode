@@ -1,25 +1,25 @@
 package day04.part1
 
-typealias Numbers = List<Int>
+typealias Numbers = List<Long>
 typealias Card = Pair<Numbers, Numbers>
 
 fun parse(lines: List<String>): List<Card> =
     lines.map { line ->
-        val numbers: (String) -> List<Int> = { part ->
+        val numbers: (String) -> Numbers = { part ->
             Regex("\\d+")
                 .findAll(part)
-                .map { n -> n.value.toInt() }
+                .map { n -> n.value.toLong() }
                 .toList()
         }
         val content = line.split(":")[1].split("|")
         numbers(content[0]) to numbers(content[1])
     }
 
-fun solve(cards: List<Card>): Int =
+fun solve(cards: List<Card>): Long =
     cards.map { card ->
         val (winning, played) = card
         val count = winning.intersect(played).size
-        1.shl(count-1)
+        1.shl(count-1).toLong()
     }.sum()
 
 fun main() {

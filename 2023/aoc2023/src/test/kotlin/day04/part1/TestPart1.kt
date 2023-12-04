@@ -19,4 +19,15 @@ class TestPart1 {
         val actual = solve(cards)
         assertEquals(expected, actual)
     }
+
+    @Test
+    fun testSolveOneLongLine() {
+        val input =
+            "Card   1: 75 68 35 36 86 83 30 11 14 59 | " +
+            "86 25 63 57 59 91 68 14 72 32 36 74 66 44 30 28 11 35 75 34 55 83 69 56 38"
+        val cards = parse(listOf(input))
+        val expected = 512
+        val actual = solve(cards)
+        assertEquals(expected, actual)
+    }
 }
