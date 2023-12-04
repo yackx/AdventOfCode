@@ -3,7 +3,7 @@ package day03.part2
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
-class TestSolver {
+class TestSolve {
     @Test
     fun testSolveSample() {
         val lines = """
