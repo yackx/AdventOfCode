@@ -19,9 +19,7 @@ fun solve(cards: List<Card>): Int =
     cards.map { card ->
         val (winning, played) = card
         val count = winning.intersect(played).size
-        val score = if (count > 0) 1.shl(count-1) else 0
-        assert(score >= 0) { "Score must be positive $score $card" }
-        score
+        if (count > 0) 1.shl(count-1) else 0
     }.sum()
 
 fun main() {
