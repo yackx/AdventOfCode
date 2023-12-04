@@ -1,6 +1,6 @@
 package day04.part1
 
-typealias Numbers = List<Long>
+typealias Numbers = List<Int>
 typealias Card = Pair<Numbers, Numbers>
 
 fun parse(lines: List<String>): List<Card> =
@@ -8,19 +8,19 @@ fun parse(lines: List<String>): List<Card> =
         val numbers: (String) -> Numbers = { part ->
             Regex("\\d+")
                 .findAll(part)
-                .map { n -> n.value.toLong() }
+                .map { n -> n.value.toInt() }
                 .toList()
         }
         val content = line.split(":")[1].split("|")
         numbers(content[0]) to numbers(content[1])
     }
 
-fun solve(cards: List<Card>): Long =
+fun solve(cards: List<Card>): Int =
     cards.map { card ->
         val (winning, played) = card
         val count = winning.intersect(played).size
-        val score = 1.shl(count-1).toLong()
-        assert(score > 0)
+        val score = if (count > 0) 1.shl(count-1) else 0
+        assert(score >= 0) { "Score must be positive $score $card" }
         score
     }.sum()
 
