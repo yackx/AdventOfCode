@@ -19,7 +19,9 @@ fun solve(cards: List<Card>): Long =
     cards.map { card ->
         val (winning, played) = card
         val count = winning.intersect(played).size
-        1.shl(count-1).toLong()
+        val score = 1.shl(count-1).toLong()
+        assert(score > 0)
+        score
     }.sum()
 
 fun main() {
