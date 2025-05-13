@@ -1,6 +1,6 @@
 package day08.part1
 
-fun solve(instructions: String, nodes: Map<String, Pair<String ,String>>): Int {
+fun solve(instructions: String, nodes: Map<String, Pair<String, String>>): Int {
     var node = "AAA"
     var instructionIndex = 0
     var steps = 0

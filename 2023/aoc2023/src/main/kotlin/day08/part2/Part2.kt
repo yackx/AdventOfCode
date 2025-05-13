@@ -1,20 +1,35 @@
-package day08.part1
+package day08.part2
 
-fun solve(instructions: String, nodes: Map<String, Pair<String ,String>>): Int {
-    var node = "AAA"
-    var instructionIndex = 0
+
+fun solve(instructions: String, nodes: Map<String, Pair<String, String>>): Int {
+    val iterators = nodes.filter { it.key.endsWith('A') }
+        .map { node -> ghost(node.key, instructions, nodes) }
+        .map { it.iterator() }
+
+    var found = false
     var steps = 0
-    while (node != "ZZZ") {
+    while (!found) {
+        val next = iterators.map { it.next() }
+        found = next.all { it.endsWith('Z') }
+        steps++
+    }
+
+    return steps
+}
+
+fun ghost(node: String, instructions: String, nodes: Map<String, Pair<String, String>>): Sequence<String> {
+    var instructionIndex = 0
+    var currentNode = node
+    return generateSequence {
         val (left, right) = nodes[node]!!
         val instruction = instructions[instructionIndex]
         when (instruction) {
-            'L' -> node = left
-            'R' -> node = right
+            'L' -> currentNode = left
+            'R' -> currentNode = right
         }
         instructionIndex = (instructionIndex + 1) % instructions.length
-        steps++
+        currentNode
     }
-    return steps
 }
 
 fun parse(lines: List<String>): Pair<String, Map<String, Pair<String, String>>> {
