@@ -1,2 +1,19 @@
 # Puzzle input
 input.txt
+
+# JVM
+*.class
+
+# Python
+.venv/
+.pytest_cache
+__pycache__
+
+# Scala
+*.tasty
+.bsp
+**/.scala-build/**
+
+# Haskell
+*.hi
+*.o
