@@ -29,9 +29,10 @@ bossArmor = 1
 validGear gear =
   hitsToDefeat bossHp (damage gear - bossArmor) <= hitsToDefeat hp (bossDamage - armor gear)
 
-solution = minimum . map cost . filter validGear $ payload
+part1 = minimum . map cost . filter validGear $ payload
+part2 = maximum . map cost . filter (not . validGear) $ payload
 
 main :: IO ()
 main = do
-  print solution
-
+  print part1
+  print part2
