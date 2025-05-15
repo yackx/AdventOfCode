@@ -55,5 +55,7 @@ main :: IO ()
 main = do
   input <- getContents
   let program = map parseInstruction (lines input)
-  let (_, finalRegB) = runProgram program 0 (0, 0)
-  putStrLn $ show finalRegB
+  let (_, finalRegB0) = runProgram program 0 (0, 0)
+  putStrLn $ show finalRegB0
+  let (_, finalRegB1) = runProgram program 0 (1, 0)
+  putStrLn $ show finalRegB1
